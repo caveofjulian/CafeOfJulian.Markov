@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.87
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaveOfJulian.Markov", "CaveOfJulian.Markov\CaveOfJulian.Markov.csproj", "{EB6400F8-0738-49C8-9F8A-E9735FB7DA8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaveOfJulian.Tests", "CaveOfJulian.Tests\CaveOfJulian.Tests.csproj", "{5A721023-5081-447B-8E8A-0D1A6B72865F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB6400F8-0738-49C8-9F8A-E9735FB7DA8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB6400F8-0738-49C8-9F8A-E9735FB7DA8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB6400F8-0738-49C8-9F8A-E9735FB7DA8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB6400F8-0738-49C8-9F8A-E9735FB7DA8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A721023-5081-447B-8E8A-0D1A6B72865F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A721023-5081-447B-8E8A-0D1A6B72865F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A721023-5081-447B-8E8A-0D1A6B72865F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A721023-5081-447B-8E8A-0D1A6B72865F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FC7DE638-2D6D-4267-B47E-EC39BDBC7F46}
+	EndGlobalSection
+EndGlobal

@@ -11,7 +11,7 @@ namespace CaveOfJulian.Markov
     internal class CycleDetector
     {
         internal readonly Matrix<double> Matrix;
-        private List<Cycle> _cycles;
+        internal List<Cycle> Cycles { get; private set; }
         private Stack<Vertex> _stack;
         private int _index = -1;
 
@@ -22,7 +22,7 @@ namespace CaveOfJulian.Markov
 
         internal List<Cycle> DetectCycles()
         {
-            _cycles = new List<Cycle>();
+            Cycles = new List<Cycle>();
             var graph = CreateVertices(Matrix);
 
             _index = 0;
@@ -36,7 +36,7 @@ namespace CaveOfJulian.Markov
                 }
             }
 
-            return _cycles;
+            return Cycles;
         }
 
         private IList<Vertex> CreateVertices(Matrix<double> graphNodes)
@@ -108,7 +108,7 @@ namespace CaveOfJulian.Markov
                 cycle.Add(v);
             } while (vertex != v);
 
-            _cycles.Add(new Cycle(cycle));
+            Cycles.Add(new Cycle(cycle));
         }
     }
 }

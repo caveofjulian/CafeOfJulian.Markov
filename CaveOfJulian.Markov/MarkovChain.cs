@@ -10,6 +10,36 @@ using MathNet.Numerics.LinearAlgebra;
 
 namespace CaveOfJulian.Markov
 {
+    public class MarkovChain<T> : MarkovChain where T:Delegate
+    {
+        public T[,] Delegates { get; set; }
+
+        public MarkovChain(Matrix<double> oneStepTransitionProbabilities, T[,] delegates, IStochastic numberGenerator = null) 
+            : base(oneStepTransitionProbabilities,numberGenerator)
+        {
+            Delegates = delegates;
+        }
+
+        public MarkovChain(double[,] oneStepTransitionProbabilities, T[,] delegates, IStochastic numberGenerator = null) 
+            : base(oneStepTransitionProbabilities,numberGenerator)
+        {
+            Delegates = delegates;
+        }
+        
+        public void Run(int startState = 0)
+        {
+            object response = null;
+
+            while (true)
+            {
+                var hasNextState = TryGetNextState(startState, out var nextState);
+                if (!hasNextState) return;
+                response = Delegates[startState, nextState].DynamicInvoke(response);
+                startState = nextState;
+            }
+        }
+    }
+
     public class MarkovChain
     {
         /// <summary>
@@ -17,24 +47,26 @@ namespace CaveOfJulian.Markov
         /// </summary>
         public Matrix<double> OneStepTransitionProbabilities { get; set; }
 
-        private readonly Random _rnd = new Random();
+        private readonly IStochastic _numberGenerator;
 
-        public MarkovChain(Matrix<double> oneStepTransitionProbabilities)
+        public MarkovChain(Matrix<double> oneStepTransitionProbabilities, IStochastic numberGenerator = null)
         {
             OneStepTransitionProbabilities = oneStepTransitionProbabilities;
+            _numberGenerator = numberGenerator ?? new Rnd();
         }
 
-        public MarkovChain(double[,] oneStepTransitionProbabilities)
+        public MarkovChain(double[,] oneStepTransitionProbabilities, IStochastic numberGenerator = null)
         {
             OneStepTransitionProbabilities = Matrix<double>.Build.DenseOfArray(oneStepTransitionProbabilities);
+            _numberGenerator = numberGenerator ?? new Rnd();
         }
 
         /// <summary>
         /// Returns random end state, depending on the number of steps. The last chain is always returned, even if the chain ended prematurely.
         /// </summary>
         /// <param name="startState"></param>
-        /// <param name="steps"></param>
-        /// <returns></returns>
+        /// <returns></returns>        /// <param name="steps"></param>
+
         public int GetNextState(int startState, int steps)
         {
             for (var i = 0; i < steps; i++)
@@ -53,7 +85,7 @@ namespace CaveOfJulian.Markov
         /// <returns></returns>
         public int GetNextState(int startState)
         {
-            var randomProbability = _rnd.NextDouble();
+            var randomProbability = _numberGenerator.NextDouble();
 
             var sum = 0d;
 

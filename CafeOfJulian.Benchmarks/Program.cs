@@ -6,103 +6,36 @@ using CaveOfJulian.Markov;
 
 namespace CafeOfJulian.Benchmarks
 {
-    struct VertexZ
-    {
-       // private static VertexZ trash = new VertexZ();
-   //     public static VertexZ TrashVertex => trash;
-
-        public readonly int Id;
-        public int Index { get; set; }
-        public int Lowlink { get; set; }
-
-        public HashSet<VertexZ> Dependencies { get; set; }
-
-        public VertexZ(int x = 0)
-        {
-            Id = -1;
-            Index = -1;
-            Lowlink = -1;
-            Dependencies = new HashSet<VertexZ>();
-        }
-    }
-
-    unsafe class VertexA 
-    {
-        private static VertexA trash = new VertexA();
-
-        public static VertexA TrashVertex => trash;
-
-        public int Id { get; set; }
-        public int Index { get; set; }
-        public int Lowlink { get; set; }
-
-        public HashSet<VertexA> Dependencies { get; set; }
-
-        public VertexA()
-        {
-            Id = -1;
-            Index = -1;
-            Lowlink = -1;
-            Dependencies = new HashSet<VertexA>
-            {
-                TrashVertex,
-                TrashVertex,
-                TrashVertex,
-                TrashVertex
-            };
-        }
-    }
-
-    unsafe class VertexB
-    {
-        public int Id { get; set; }
-        public int Index { get; set; }
-        public int Lowlink { get; set; }
-
-        public VertexB()
-        {
-            Id = -1;
-            Index = -1;
-            Lowlink = -1;
-        }
-    }
-
-    unsafe struct VertexC
-    {
-        public int Id { get; set; }
-        public int Index { get; set; }
-        public int Lowlink { get; set; }
-
-        public VertexC(int i)
-        {
-            Id = -1;
-            Index = -1;
-            Lowlink = -1;
-        }
-    }
-
-    class Program
+   class Program
     {
         static void Main(string[] args)
         {
+            double[,] probabilities =
+            {
+                {0,0.5,0.5 },
+                {0.5,0,0.5 },
+                {0.5,0.5,0 }
+            };
+
+            Func<int, int>[] funcs =
+            {
+                Func, 
+            };
+
+            var chain = new MarkovChain<Func<int,int>>(probabilities,funcs);
+
             BenchmarkRunner.Run<ListBenchmark>();
             Console.ReadKey();
         }
 
-        public static void Talk()
+        private static int Func(int arg)
         {
-            Console.WriteLine("Hi, how are you?");
+            throw new NotImplementedException();
         }
 
-        public static void Bark()
+        static void DoSomething(int x)
         {
-            Console.WriteLine("WOOOF!");
-        }
 
-        public static void Laugh()
-        {
-            Console.WriteLine("HAHAHAHA");
         }
-
     }
 }

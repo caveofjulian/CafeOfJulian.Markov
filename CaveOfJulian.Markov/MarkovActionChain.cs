@@ -7,14 +7,14 @@ namespace CaveOfJulian.Markov
 {
     public class MarkovActionChain : MarkovChain
     {
-        public Action[,] Actions { get; set; }
+        public Func<int, int>[,] Actions { get; set; }
 
-        public MarkovActionChain(double[,] oneStepTransitionProbabilities, Action[,] actions) : base(oneStepTransitionProbabilities)
+        public MarkovActionChain(double[,] oneStepTransitionProbabilities, Func<int,int>[,] actions) : base(oneStepTransitionProbabilities)
         {
             Actions = actions;
         }
 
-        public MarkovActionChain(Matrix<double> oneStepTransitionProbabilities, Action[,] actions) : base(oneStepTransitionProbabilities)
+        public MarkovActionChain(Matrix<double> oneStepTransitionProbabilities, Func<int, int>[,] actions) : base(oneStepTransitionProbabilities)
         {
             Actions = actions;
         }
@@ -25,7 +25,7 @@ namespace CaveOfJulian.Markov
             {
                 var hasNextState = TryGetNextState(startState, out var nextState);
                 if (!hasNextState) return;
-                Actions[startState,nextState]?.Invoke();
+                Actions[startState,nextState].Invoke(nextState);
                 startState = nextState;
             }
         }

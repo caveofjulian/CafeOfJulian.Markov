@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaveOfJulian.Markov", "Cave
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaveOfJulian.Tests", "CaveOfJulian.Tests\CaveOfJulian.Tests.csproj", "{5A721023-5081-447B-8E8A-0D1A6B72865F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CafeOfJulian.Benchmarks", "CafeOfJulian.Benchmarks\CafeOfJulian.Benchmarks.csproj", "{B8E25916-A96E-4E80-A523-9D9004D364DB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{5A721023-5081-447B-8E8A-0D1A6B72865F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A721023-5081-447B-8E8A-0D1A6B72865F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A721023-5081-447B-8E8A-0D1A6B72865F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8E25916-A96E-4E80-A523-9D9004D364DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8E25916-A96E-4E80-A523-9D9004D364DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8E25916-A96E-4E80-A523-9D9004D364DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8E25916-A96E-4E80-A523-9D9004D364DB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

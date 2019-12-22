@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Input\cs\" />
+    <ProjectReference Include="..\CaveOfJulian.Markov\CaveOfJulian.Markov.csproj" />
   </ItemGroup>
 
 </Project>

@@ -7,16 +7,13 @@ namespace CaveOfJulian.Markov
     internal class Vertex
     {
         public int Id { get; set; }
-        public int Index { get; set; }
-        public int Lowlink { get; set; }
+        public int Index { get; set; } = -1;
+        public int LowLink { get; set; } = -1;
 
         public HashSet<Vertex> Dependencies { get; set; }
 
         public Vertex()
         {
-            Id = -1;
-            Index = -1;
-            Lowlink = -1;
             Dependencies = new HashSet<Vertex>();
         }
     }

@@ -10,36 +10,6 @@ using MathNet.Numerics.LinearAlgebra;
 
 namespace CaveOfJulian.Markov
 {
-    public class MarkovChain<T> : MarkovChain where T:Delegate
-    {
-        public T[,] Delegates { get; set; }
-
-        public MarkovChain(Matrix<double> oneStepTransitionProbabilities, T[,] delegates, IStochastic numberGenerator = null) 
-            : base(oneStepTransitionProbabilities,numberGenerator)
-        {
-            Delegates = delegates;
-        }
-
-        public MarkovChain(double[,] oneStepTransitionProbabilities, T[,] delegates, IStochastic numberGenerator = null) 
-            : base(oneStepTransitionProbabilities,numberGenerator)
-        {
-            Delegates = delegates;
-        }
-        
-        public void Run(int startState = 0)
-        {
-            object response = null;
-
-            while (true)
-            {
-                var hasNextState = TryGetNextState(startState, out var nextState);
-                if (!hasNextState) return;
-                response = Delegates[startState, nextState].DynamicInvoke(response);
-                startState = nextState;
-            }
-        }
-    }
-
     public class MarkovChain
     {
         /// <summary>
@@ -65,7 +35,7 @@ namespace CaveOfJulian.Markov
         /// Returns random end state, depending on the number of steps. The last chain is always returned, even if the chain ended prematurely.
         /// </summary>
         /// <param name="startState"></param>
-        /// <returns></returns>        /// <param name="steps"></param>
+        /// <returns></returns><param name="steps"></param>
 
         public int GetNextState(int startState, int steps)
         {
@@ -229,18 +199,6 @@ namespace CaveOfJulian.Markov
             return Math.Abs(OneStepTransitionProbabilities[state, state] - 1) < acceptedDifference;
         }
 
-        public bool IsRecurrent(int state)
-        {
-            throw  new NotImplementedException();
-        }
-
-        public bool IsTransient(int state)
-        {
-            var cycleDetector = new CycleDetector(OneStepTransitionProbabilities);
-            var cycles = cycleDetector.DetectCycles();
-
-        }
-
         public double AverageSteps(int startState = 0)
         {
             var determinant = OneStepTransitionProbabilities.Determinant();
@@ -260,7 +218,6 @@ namespace CaveOfJulian.Markov
                 throw new NegativeProbabilityException("Matrix may not contain negative values!");
 
             OneStepTransitionProbabilities = OneStepTransitionProbabilities.NormalizeRows(1.0);
-
         }
     }
 }

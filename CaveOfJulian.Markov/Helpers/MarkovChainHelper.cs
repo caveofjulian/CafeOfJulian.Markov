@@ -8,9 +8,9 @@ namespace CaveOfJulian.Markov.Helpers
 {
     internal static class MarkovChainHelper
     {
-        public static bool IsRecurrent(int state, int totalStates, IList<Cycle>)
+        public static bool IsRecurrent(int state, int totalStates, IList<Cycle> cycles)
         {
-
+            return true;
         }
         public static bool IsTransient(int state, int totalStates, IList<Cycle> cycles)
         {
@@ -29,7 +29,8 @@ namespace CaveOfJulian.Markov.Helpers
 
             if (IsEndState(vertex)) return false;
             if (vertex.Dependencies.Count is 1) return true;
-
+            
+            throw new NotImplementedException();
 
         }
 

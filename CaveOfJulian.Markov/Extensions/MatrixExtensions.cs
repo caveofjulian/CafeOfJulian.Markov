@@ -35,13 +35,14 @@ namespace CaveOfJulian.Markov.Extensions
                 return MarkovChainHelper.IsRecurrent(state, matrix.RowCount, _detector.Cycles);
             }
 
-            _detector.
+            throw new NotImplementedException();
         }
 
         public static bool IsTransient(this Matrix<double> matrix, int state)
         {
             if (matrix.IsEndState(state)) return true;
 
+            throw new NotImplementedException();
         }
 
         public static bool ContainsNegativeValue(this Matrix<double> matrix)

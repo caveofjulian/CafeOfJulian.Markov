@@ -30,7 +30,7 @@ namespace CaveOfJulian.Markov
 
             foreach (var vertex in graph)
             {
-                if (vertex.Index < 0)
+                if (vertex.Index is -1)
                 {
                     StronglyConnect(vertex);
                 }
@@ -48,9 +48,7 @@ namespace CaveOfJulian.Markov
             {
                 list.Add(new Vertex()
                 {
-                    Id = i,
-                    Index = -1,
-                    Lowlink = -1,
+                    Id = i
                 });   
             }
 
@@ -73,25 +71,25 @@ namespace CaveOfJulian.Markov
         private void StronglyConnect(Vertex vertex)
         {
             vertex.Index = _index;
-            vertex.Lowlink = _index;
+            vertex.LowLink = _index;
 
             _index++;
             _stack.Push(vertex);
 
             foreach (var dependency in vertex.Dependencies)
             {
-                if (dependency.Index < 0)
+                if (dependency.Index is -1)
                 {
                     StronglyConnect(dependency);
-                    vertex.Lowlink = Math.Min(vertex.Lowlink, dependency.Lowlink);
+                    vertex.LowLink = Math.Min(vertex.LowLink, dependency.LowLink);
                 }
                 else if (_stack.Contains(dependency))
                 {
-                    vertex.Lowlink = Math.Min(vertex.Lowlink, dependency.Index);
+                    vertex.LowLink = Math.Min(vertex.LowLink, dependency.Index);
                 }
             }
 
-            if (vertex.Lowlink == vertex.Index)
+            if (vertex.LowLink == vertex.Index)
             {
                 AddCycle(vertex);
             }

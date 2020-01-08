@@ -51,11 +51,11 @@ namespace CaveOfJulian.Markov
         /// Throws when there is no feasible next state.
         /// </summary>
         /// <param name="startState">Starting state.</param>
-        /// <returns>Next state.</returns>
+        /// <returns>Next state. Returns -1 if there is no feasible next state.</returns>
         public int GetNextState(int startState)
         {
+            const int stateNotFound = -1;
             var randomProbability = _numberGenerator.NextDouble();
-
             var sum = 0d;
 
             for (var i = 0; i < OneStepTransitionProbabilities.ColumnCount; i++)
@@ -65,49 +65,7 @@ namespace CaveOfJulian.Markov
                 if (randomProbability < sum) return i;
             }
 
-            throw new NoNextStateException();
-        }
-
-        /// <summary>
-        /// Gets a state after N states have randomly been chosen based on the one step transition probabilities.
-        /// A return value indicates whether there is a feasible next state.
-        /// </summary>
-        /// <param name="startState"></param>
-        /// <param name="steps"></param>
-        /// <param name="state"></param>
-        /// <returns></returns>
-        public bool TryGetNextState(int startState, int steps, out int state)
-        {
-            state = -1;
-
-            for (var i = 0; i < steps; i++)
-            {
-                var hasNextState = TryGetNextState(startState, out var next);
-                if (!hasNextState) return false;
-            }
-
-            return true;
-        }
-
-        /// <summary>
-        /// Gets a next state based on the one step transition probabilities.
-        /// A return value indicates whether there is a feasible next state.
-        /// </summary>
-        /// <param name="startState"></param>
-        /// <param name="next"></param>
-        /// <returns></returns>
-        public bool TryGetNextState(int startState, out int next)
-        {
-            next = -1;
-            try
-            {
-                next = GetNextState(startState);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
+            return stateNotFound;
         }
 
         /// <summary>

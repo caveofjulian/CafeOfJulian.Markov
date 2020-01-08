@@ -20,9 +20,12 @@ namespace CafeOfJulian.Benchmarks
 
         public void Run(int startState = 0)
         {
-            T response = default;
+            const int stateNotFound = -1;
+            int nextState;
 
-            while (TryGetNextState(startState, out var nextState))
+            T response = default;
+            
+            while ((nextState = GetNextState(startState)) != stateNotFound)
             {
                 response = (T) Actions[startState, nextState].DynamicInvoke(response);
                 startState = nextState;

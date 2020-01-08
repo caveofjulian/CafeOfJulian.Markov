@@ -39,7 +39,10 @@ namespace CaveOfJulian.Markov
 
         public void Run(int startState = 0, Predicate<TChain> quitCondition = null)
         {
-            while (TryGetNextState(startState, out var nextState))
+            const int stateNotFound = -1;
+            int nextState;
+
+            while ((nextState = GetNextState(startState)) != stateNotFound)
             {
                 if(quitCondition != null && quitCondition.Invoke(LastValue)) break;
 
@@ -67,7 +70,10 @@ namespace CaveOfJulian.Markov
 
         public void Run(int startState = 0)
         {
-            while (TryGetNextState(startState, out var nextState))
+            const int stateNotFound = -1;
+            int nextState;
+
+            while ((nextState = GetNextState(startState)) != stateNotFound)
             {
                 Actions[startState, nextState].Invoke();
                 startState = nextState;

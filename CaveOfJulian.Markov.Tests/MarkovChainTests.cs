@@ -95,14 +95,6 @@ namespace CaveOfJulian.Tests
             Assert.Throws()
             chain.GetNextState(state);
             throw new NotImplementedException();
-        }
-
-        //[Theory]
-        public void TryGetNextState(double[,] probabilities)
-        {
-            var chain = new MarkovChain(probabilities);
-            var succeeded = chain.TryGetNextState(0,out var state);
-            throw  new NotImplementedException();
         }*/
 
     }

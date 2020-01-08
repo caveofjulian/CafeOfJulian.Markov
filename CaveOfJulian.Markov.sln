@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaveOfJulian.Markov", "CaveOfJulian.Markov\CaveOfJulian.Markov.csproj", "{EB6400F8-0738-49C8-9F8A-E9735FB7DA8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaveOfJulian.Markov", "CaveOfJulian.Markov\CaveOfJulian.Markov.csproj", "{EB6400F8-0738-49C8-9F8A-E9735FB7DA8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaveOfJulian.Tests", "CaveOfJulian.Tests\CaveOfJulian.Tests.csproj", "{5A721023-5081-447B-8E8A-0D1A6B72865F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaveOfJulian.Tests", "CaveOfJulian.Tests\CaveOfJulian.Tests.csproj", "{5A721023-5081-447B-8E8A-0D1A6B72865F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CafeOfJulian.Benchmarks", "CafeOfJulian.Benchmarks\CafeOfJulian.Benchmarks.csproj", "{B8E25916-A96E-4E80-A523-9D9004D364DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaveOfJulian.Benchmarks", "CafeOfJulian.Benchmarks\CaveOfJulian.Benchmarks.csproj", "{B8E25916-A96E-4E80-A523-9D9004D364DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

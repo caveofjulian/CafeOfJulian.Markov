@@ -11,11 +11,10 @@ namespace CaveOfJulian.Markov
     /// <typeparam name="TChain"></typeparam>
     public class MarkovActionChain<TChain> : MarkovChain
     {
-        private double[,] v;
-        private Func<int, int>[,] func;
-
         public Func<TChain, TChain>[,] Actions { get; set; }
-        
+
+        public TChain LastValue { get; set; }
+
         public MarkovActionChain(Matrix<double> oneStepTransitionProbabilities, Func<TChain, TChain>[,] actions, IStochastic numberGenerator = null)
             : base(oneStepTransitionProbabilities, numberGenerator)
         {
@@ -28,13 +27,13 @@ namespace CaveOfJulian.Markov
             Actions = actions;
         }
 
-        public void Run(int startState = 0)
+        public void Run(int startState = 0, Predicate<TChain> quitCondition = null)
         {
-            TChain response = default;
-
             while (TryGetNextState(startState, out var nextState))
             {
-                response = Actions[startState, nextState].Invoke(response);
+                if(quitCondition.Invoke(LastValue)) break;
+
+                LastValue = Actions[startState, nextState].Invoke(LastValue); 
                 startState = nextState;
             }
         }

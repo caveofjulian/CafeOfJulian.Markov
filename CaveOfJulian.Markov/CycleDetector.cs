@@ -43,7 +43,6 @@ namespace CaveOfJulian.Markov
         {
             var list = new List<Vertex>();
 
-
             for (var i = 0; i < graphNodes.RowCount; i++)
             {
                 list.Add(new Vertex()
@@ -54,13 +53,13 @@ namespace CaveOfJulian.Markov
 
             for (var i = 0; i < graphNodes.RowCount; i++)
             {
-                list[i].Dependencies = new HashSet<Vertex>();
+                list[i].Successors = new HashSet<Vertex>();
 
                 for (var j = 0; j < graphNodes.ColumnCount; j++)
                 {
                     if (graphNodes[i, j] > 0)
                     {
-                        list[i].Dependencies.Add(list[j]);
+                        list[i].Successors.Add(list[j]);
                     }
                 }
             }
@@ -76,7 +75,7 @@ namespace CaveOfJulian.Markov
             _index++;
             _stack.Push(vertex);
 
-            foreach (var dependency in vertex.Dependencies)
+            foreach (var dependency in vertex.Successors)
             {
                 if (dependency.Index is -1)
                 {

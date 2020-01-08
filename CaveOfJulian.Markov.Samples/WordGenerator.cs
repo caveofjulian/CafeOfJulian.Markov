@@ -42,7 +42,7 @@ namespace CaveOfJulian.Markov.Samples
         
         private static string GetRandomNoun()
         {
-            return "sample"
+            return "sample";
         }
 
         private static string GetRandomAdjective()

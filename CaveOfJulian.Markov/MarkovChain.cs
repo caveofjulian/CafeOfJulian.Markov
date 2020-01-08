@@ -119,23 +119,7 @@ namespace CaveOfJulian.Markov
         /// <param name="next">Next state.</param>
         /// <returns></returns>
         public double CalculateProbability(int start, int next) => OneStepTransitionProbabilities[start, next];
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="start">Starting state.</param>
-        /// <param name="nextStates">Sequence of next states.</param>
-        /// <returns></returns>
-        public double CalculateProbability(int start, int[] nextStates) => CalculatePathProbability(start, nextStates);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="start">Starting state.</param>
-        /// <param name="nextStates">Sequence of next states.</param>
-        /// <returns></returns>
-        public double CalculateProbability(int start, IList<int> nextStates) => CalculatePathProbability(start, nextStates);
-
+        
         /// <summary>
         /// 
         /// </summary>
@@ -152,37 +136,19 @@ namespace CaveOfJulian.Markov
 
         private double CalculatePathProbability(IEnumerable<int> steps)
         {
-            double result = 1;
-
             if(steps is null) throw new ArgumentNullException(nameof(steps));
-
-            var hasFirst = steps.GetEnumerator().MoveNext();
-
-            if (!hasFirst) throw new InvalidMarkovOperationException($"{nameof(steps)} cannot be empty!");
-            var currentState = steps.GetEnumerator().Current;
-
-            while (steps.GetEnumerator().MoveNext())
-            {
-                var nextState = steps.GetEnumerator().Current;
-                result *= OneStepTransitionProbabilities[currentState, nextState];
-                currentState = nextState;
-            }
-
-            return result;
-        }
-
-        // This function is separated for performance reasons. 
-        private double CalculatePathProbability(int start, IEnumerable<int> steps)
-        {
+            
             double result = 1;
 
-            if (steps is null) throw new ArgumentNullException(nameof(steps));
+            if(!steps.Any()) throw new InvalidMarkovOperationException($"{nameof(steps)} cannot be empty!");
+            
+            var currentState = steps.First();
 
-            while (steps.GetEnumerator().MoveNext())
+            foreach (var step in steps)
             {
-                var nextState = steps.GetEnumerator().Current;
-                result *= OneStepTransitionProbabilities[start, nextState];
-                start = nextState;
+                result *= OneStepTransitionProbabilities[currentState, step];
+                if(result < 0) throw new NegativeProbabilityException();
+                currentState = step;
             }
 
             return result;
@@ -194,9 +160,9 @@ namespace CaveOfJulian.Markov
         /// <param name="state"></param>
         /// <param name="acceptedDifference"></param>
         /// <returns></returns>
-        public bool IsAbsorbingState(int state, double acceptedDifference = 0.0000001)
+        public bool IsAbsorbingState(int state, double acceptedDifference = 0.005)
         {
-            return Math.Abs(OneStepTransitionProbabilities[state, state] - 1) < acceptedDifference;
+            return OneStepTransitionProbabilities[state, state].Equals(1, acceptedDifference);
         }
 
         public double AverageSteps(int startState = 0)

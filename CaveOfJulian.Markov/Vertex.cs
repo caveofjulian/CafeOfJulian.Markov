@@ -10,11 +10,11 @@ namespace CaveOfJulian.Markov
         public int Index { get; set; } = -1;
         public int LowLink { get; set; } = -1;
 
-        public HashSet<Vertex> Dependencies { get; set; }
+        public HashSet<Vertex> Successors { get; set; }
 
         public Vertex()
         {
-            Dependencies = new HashSet<Vertex>();
+            Successors = new HashSet<Vertex>();
         }
     }
 }

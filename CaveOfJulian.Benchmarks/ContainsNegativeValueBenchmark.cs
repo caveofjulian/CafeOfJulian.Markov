@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Jobs;
 using MathNet.Numerics.LinearAlgebra;
-using MathNet.Numerics.LinearAlgebra.Double;
 
-namespace CafeOfJulian.Benchmarks
+namespace CaveOfJulian.Benchmarks
 {
     [SimpleJob(RuntimeMoniker.NetCoreApp30)]
     [RPlotExporter]

@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Threading;
 using CaveOfJulian.Markov;
 using CaveOfJulian.Markov.Exceptions;
 using CaveOfJulian.Tests.Input.cs;
@@ -8,15 +10,19 @@ namespace CaveOfJulian.Tests
 {
     public class MarkovChainTests
     {
-        [Fact]
-        public void Get_Random_()
-        {
 
+        [ClassData(typeof(AbsorbingStatesInput))]
+        [Theory]
+        public void Is_Markov_Chain_Absorbing_Should_Succeed(double[,] probabilities, bool expected)
+        {
+            var chain = new MarkovChain(probabilities);
+            var actual = chain.IsAbsorbingState(0);
+            Assert.Equal(expected, actual);
         }
 
         [ClassData(typeof(NormalizeNegativeInput))]
         [Theory]
-        public void Normalize_Chain_Negative_Values_Should_Throw_NegativeProbabilityException(double[,] probabilities, double[,] expected)
+        public void Normalize_Chain_Negative_Values_Should_Throw_NegativeProbabilityException(double[,] probabilities)
         {
             var chain = new MarkovChain(probabilities);
             Assert.Throws<NegativeProbabilityException>(chain.Normalize);
@@ -28,7 +34,67 @@ namespace CaveOfJulian.Tests
         {
             var chain = new MarkovChain(probabilities);
             chain.Normalize();
-            Assert.Equal(expected, chain.OneStepTransitionProbabilities.ToArray());
+            var actual = chain.OneStepTransitionProbabilities.ToArray();
+            Assert.Equal(expected, actual);
         }
+
+        [ClassData(typeof(OneStepTransitionProbabilityInput))]
+        [Theory]
+        public void OneStepTransitionProbability_valid_start_end_succeeds(double[,] probabilities, int start, int end,
+            double expected)
+        {
+            var chain = new MarkovChain(probabilities);
+            var actual = chain.CalculateProbability(start, end);
+            Assert.Equal(expected,actual);
+        }
+
+        [ClassData(typeof(OneStepTransitionProbabilityInvalidStartEndInput))]
+        [Theory]
+        public void OneStepTransitionProbability_invalid_start_end_should_throw(double[,] probabilities, int start, int end)
+        {
+            var chain = new MarkovChain(probabilities);
+            Assert.Throws<ArgumentOutOfRangeException>(() => chain.CalculateProbability(start, end));
+        }
+
+        [ClassData(typeof(OneStepTransitionProbabilityNegativeProbabilitiesInput))]
+        [Theory]
+        public void OneStepTransitionProbability_negative_probabilities_should_throw(double[,] probabilities, int start, int end)
+        {
+            var chain = new MarkovChain(probabilities);
+            Assert.Throws<NegativeProbabilityException>(() => chain.CalculateProbability(start, end));
+        }
+
+        [ClassData(typeof(PathProbabilitiesArrayInput))]
+        [Theory]
+        public void Path_Array_Succeeds(double[,] probabilities, int[] path, double expected)
+        {
+            var chain = new MarkovChain(probabilities);
+            var actual = chain.CalculateProbability(path);
+            Assert.Equal(expected,actual);
+        }
+
+        [ClassData(typeof(PathProbabilitiesListInput))]
+        [Theory]
+        public void Path_List_Succeeds(double[,] probabilities, List<int> path, double expected)
+        {
+            var chain = new MarkovChain(probabilities);
+            var actual = chain.CalculateProbability(path);
+            Assert.Equal(expected,actual);
+        }
+
+        //[Theory]
+        public void GetNextState_Should_Throw(double[,] probabilities)
+        {
+            throw new NotImplementedException();
+        }
+
+        //[Theory]
+        public void TryGetNextState(double[,] probabilities)
+        {
+            var chain = new MarkovChain(probabilities);
+            var succeeded = chain.TryGetNextState(0,out var state);
+            throw  new NotImplementedException();
+        }
+
     }
 }

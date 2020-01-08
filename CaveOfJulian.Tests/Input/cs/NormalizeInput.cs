@@ -5,7 +5,7 @@ using System.Text;
 using CaveOfJulian.Markov;
 
 namespace CaveOfJulian.Tests.Input.cs
-{
+{ 
     public class NormalizeSuccessInput : IEnumerable<object[]>
     {
         public IEnumerator<object[]> GetEnumerator()
@@ -43,9 +43,12 @@ namespace CaveOfJulian.Tests.Input.cs
                     {-25,-25,-25,-25 },
                 },
 
+
             };
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     }
+
+
 }

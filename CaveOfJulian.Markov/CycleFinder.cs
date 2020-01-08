@@ -8,14 +8,14 @@ namespace CaveOfJulian.Markov
     /// <summary>
     /// Detects strongly connected components and stores it as a cycle.
     /// </summary>
-    internal class CycleDetector
+    internal class CycleFinder
     {
         internal readonly Matrix<double> Matrix;
         internal List<Cycle> Cycles { get; private set; }
         private Stack<Vertex> _stack;
         private int _index = -1;
 
-        internal CycleDetector(Matrix<double> matrix)
+        internal CycleFinder(Matrix<double> matrix)
         {
             Matrix = matrix;
         }

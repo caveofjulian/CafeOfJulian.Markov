@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaveOfJulian.Markov", "CaveOfJulian.Markov\CaveOfJulian.Markov.csproj", "{EB6400F8-0738-49C8-9F8A-E9735FB7DA8A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaveOfJulian.Tests", "CaveOfJulian.Tests\CaveOfJulian.Tests.csproj", "{5A721023-5081-447B-8E8A-0D1A6B72865F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaveOfJulian.Markov.Benchmarks", "CaveOfJulian.Markov.Benchmarks\CaveOfJulian.Markov.Benchmarks.csproj", "{E18E7A67-BFEA-4AEB-B43E-2E093768CF87}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaveOfJulian.Benchmarks", "CafeOfJulian.Benchmarks\CaveOfJulian.Benchmarks.csproj", "{B8E25916-A96E-4E80-A523-9D9004D364DB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaveOfJulian.Tests", "CaveOfJulian.Markov.Tests\CaveOfJulian.Tests.csproj", "{EF190E95-2D4F-49C0-94AC-AA21386D1936}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaveOfJulian.Markov.Samples", "CaveOfJulian.Markov.Samples\CaveOfJulian.Markov.Samples.csproj", "{9FB0EFF9-2511-4A3F-B250-A9EF5E2EA125}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,14 +21,18 @@ Global
 		{EB6400F8-0738-49C8-9F8A-E9735FB7DA8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB6400F8-0738-49C8-9F8A-E9735FB7DA8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB6400F8-0738-49C8-9F8A-E9735FB7DA8A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5A721023-5081-447B-8E8A-0D1A6B72865F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5A721023-5081-447B-8E8A-0D1A6B72865F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5A721023-5081-447B-8E8A-0D1A6B72865F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5A721023-5081-447B-8E8A-0D1A6B72865F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B8E25916-A96E-4E80-A523-9D9004D364DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B8E25916-A96E-4E80-A523-9D9004D364DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B8E25916-A96E-4E80-A523-9D9004D364DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B8E25916-A96E-4E80-A523-9D9004D364DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E18E7A67-BFEA-4AEB-B43E-2E093768CF87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E18E7A67-BFEA-4AEB-B43E-2E093768CF87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E18E7A67-BFEA-4AEB-B43E-2E093768CF87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E18E7A67-BFEA-4AEB-B43E-2E093768CF87}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF190E95-2D4F-49C0-94AC-AA21386D1936}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF190E95-2D4F-49C0-94AC-AA21386D1936}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF190E95-2D4F-49C0-94AC-AA21386D1936}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF190E95-2D4F-49C0-94AC-AA21386D1936}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FB0EFF9-2511-4A3F-B250-A9EF5E2EA125}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FB0EFF9-2511-4A3F-B250-A9EF5E2EA125}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FB0EFF9-2511-4A3F-B250-A9EF5E2EA125}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FB0EFF9-2511-4A3F-B250-A9EF5E2EA125}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

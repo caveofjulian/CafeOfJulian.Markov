@@ -32,11 +32,10 @@ namespace CaveOfJulian.Markov
         }
 
         /// <summary>
-        /// Returns random end state, depending on the number of steps. The last chain is always returned, even if the chain ended prematurely.
+        /// Returns random end state, depending on the number of steps. The last chain is always returned, even if the chain ends prematurely.
         /// </summary>
         /// <param name="startState"></param>
         /// <returns></returns><param name="steps"></param>
-
         public int GetNextState(int startState, int steps)
         {
             for (var i = 0; i < steps; i++)
@@ -49,10 +48,10 @@ namespace CaveOfJulian.Markov
 
         /// <summary>
         /// Returns the next state randomly based on the one step transition probabilities.
-        /// Returns -1 when there is no feasible next state.
+        /// Throws when there is no feasible next state.
         /// </summary>
         /// <param name="startState">Starting state.</param>
-        /// <returns></returns>
+        /// <returns>Next state.</returns>
         public int GetNextState(int startState)
         {
             var randomProbability = _numberGenerator.NextDouble();
@@ -66,7 +65,7 @@ namespace CaveOfJulian.Markov
                 if (randomProbability < sum) return i;
             }
 
-            return -1;
+            throw new NoNextStateException();
         }
 
         /// <summary>
@@ -100,11 +99,10 @@ namespace CaveOfJulian.Markov
         public bool TryGetNextState(int startState, out int next)
         {
             next = -1;
-
             try
             {
                 next = GetNextState(startState);
-                return next != -1;
+                return true;
             }
             catch
             {

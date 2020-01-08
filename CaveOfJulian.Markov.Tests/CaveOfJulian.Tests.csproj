@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
@@ -6,6 +6,10 @@
     <IsPackable>false</IsPackable>
 
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+    <AssemblyName>CaveOfJulian.Markov.Tests</AssemblyName>
+
+    <RootNamespace>CaveOfJulian.Markov.Tests</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

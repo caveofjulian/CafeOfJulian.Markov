@@ -15,23 +15,33 @@ namespace CaveOfJulian.Markov
 
         public TChain LastValue { get; set; }
 
-        public MarkovActionChain(Matrix<double> oneStepTransitionProbabilities, Func<TChain, TChain>[,] actions, IStochastic numberGenerator = null)
+        public MarkovActionChain(Matrix<double> oneStepTransitionProbabilities, Func<TChain, TChain>[,] actions, TChain beginValue = default, IStochastic numberGenerator = null)
             : base(oneStepTransitionProbabilities, numberGenerator)
         {
             Actions = actions;
+
+            if (!typeof(TChain).IsValueType)
+            {
+                LastValue = Activator.CreateInstance<TChain>();
+            }
         }
 
-        public MarkovActionChain(double[,] oneStepTransitionProbabilities, Func<TChain, TChain>[,] actions, IStochastic numberGenerator = null)
+        public MarkovActionChain(double[,] oneStepTransitionProbabilities, Func<TChain, TChain>[,] actions, TChain beginValue = default, IStochastic numberGenerator = null)
             : base(oneStepTransitionProbabilities, numberGenerator)
         {
             Actions = actions;
+
+            if (!typeof(TChain).IsValueType)
+            {
+                LastValue = Activator.CreateInstance<TChain>();
+            }
         }
 
         public void Run(int startState = 0, Predicate<TChain> quitCondition = null)
         {
             while (TryGetNextState(startState, out var nextState))
             {
-                if(quitCondition.Invoke(LastValue)) break;
+                if(quitCondition != null && quitCondition.Invoke(LastValue)) break;
 
                 LastValue = Actions[startState, nextState].Invoke(LastValue); 
                 startState = nextState;

@@ -4,6 +4,7 @@ using System.Threading;
 using CaveOfJulian.Markov;
 using CaveOfJulian.Markov.Exceptions;
 using CaveOfJulian.Tests.Input.cs;
+using Moq;
 using Xunit;
 
 namespace CaveOfJulian.Tests
@@ -82,9 +83,17 @@ namespace CaveOfJulian.Tests
             Assert.Equal(expected,actual);
         }
 
-        //[Theory]
-        public void GetNextState_Should_Throw(double[,] probabilities)
+        /*
+        [Theory]
+        public void GetNextState_Should_Throw(double[,] probabilities, int state, int stochasticReturn)
         {
+            var mock = new Mock<IStochastic>();
+            mock.Setup(m => m.NextDouble()).Returns(stochasticReturn);
+
+            var chain = new MarkovChain(probabilities, mock.Object);
+            
+            Assert.Throws()
+            chain.GetNextState(state);
             throw new NotImplementedException();
         }
 
@@ -94,7 +103,7 @@ namespace CaveOfJulian.Tests
             var chain = new MarkovChain(probabilities);
             var succeeded = chain.TryGetNextState(0,out var state);
             throw  new NotImplementedException();
-        }
+        }*/
 
     }
 }

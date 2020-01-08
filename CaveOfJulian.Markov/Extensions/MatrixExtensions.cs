@@ -8,7 +8,7 @@ namespace CaveOfJulian.Markov.Extensions
 {
     public static class MatrixExtensions
     {
-        private static CycleDetector _detector;
+        private static CycleFinder _finder;
         
         public static bool IsEndState(this Matrix<double> matrix, int state)
         {
@@ -26,13 +26,13 @@ namespace CaveOfJulian.Markov.Extensions
 
             if (matrix.RowCount is 1) return matrix[state,state] is 1;
 
-            if (_detector is null)
+            if (_finder is null)
             {
-                _detector = new CycleDetector(matrix);
+                _finder = new CycleFinder(matrix);
             }
-            else if (_detector.Matrix.Equals(matrix))
+            else if (_finder.Matrix.Equals(matrix))
             {
-                return MarkovChainHelper.IsRecurrent(state, matrix.RowCount, _detector.Cycles);
+                return MarkovChainHelper.IsRecurrent(state, matrix.RowCount, _finder.Cycles);
             }
 
             throw new NotImplementedException();
